@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>House of Pilates — Canal Winchester</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600&family=Cormorant+SC:wght@500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --espresso:#2B1B12;
+    --espresso-2:#3B2617;
+    --clay:#A15C4E;
+    --clay-light:#C08172;
+    --parchment:#F5EEE2;
+    --sand:#E7D6BC;
+    --gold:#B08D4F;
+    --gold-soft:#C7A669;
+    --ink:#2A2016;
+    --ink-soft:#5B4C3C;
+    --line: rgba(176,141,79,0.35);
+    --max: 1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Cormorant',serif;
+    font-weight:500;
+    color:var(--espresso);
+    letter-spacing:0.01em;
+  }
+
+  .caps{
+    font-family:'Cormorant SC', serif;
+    text-transform:uppercase;
+    letter-spacing:0.28em;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  /* ---------- utility: bracket motif (echoes the studio's own mark) ---------- */
+  .bracket{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    color:var(--gold);
+  }
+  .bracket .rule{
+    height:1px;
+    width:46px;
+    background:var(--gold);
+    opacity:0.65;
+  }
+  .bracket span.label{
+    font-family:'Cormorant SC',serif;
+    font-size:0.78rem;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  .bracket.dark{ color:var(--sand); }
+  .bracket.dark .rule{ background:var(--sand); opacity:0.5;}
+  .bracket.dark span.label{ color:var(--sand); }
+
+  /* ---------- breath ring — the signature motif ---------- */
+  .breath-ring{
+    width:14px;height:14px;border-radius:50%;
+    border:1px solid var(--gold);
+    display:inline-block;
+    animation: breathe 5.2s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{ transform:scale(0.72); opacity:0.55; }
+    50%{ transform:scale(1); opacity:1; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .breath-ring{animation:none;}
+    *{scroll-behavior:auto !important;}
+  }
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 5%;
+    background:linear-gradient(to bottom, rgba(43,27,18,0.85), rgba(43,27,18,0));
+    transition:background 0.4s ease, padding 0.4s ease;
+  }
+  header.scrolled{
+    background:var(--espresso);
+    padding:14px 5%;
+    box-shadow:0 6px 24px rgba(0,0,0,0.18);
+  }
+  .logo{
+    font-family:'Cormorant SC',serif;
+    font-size:1.15rem;
+    letter-spacing:0.24em;
+    color:var(--parchment);
+  }
+  nav ul{
+    display:flex; gap:38px; list-style:none;
+  }
+  nav a{
+    font-size:0.82rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--sand);
+    padding-bottom:4px;
+    border-bottom:1px solid transparent;
+    transition:border-color 0.3s, color 0.3s;
+  }
+  nav a:hover{ color:var(--parchment); border-color:var(--gold); }
+  .nav-cta{
+    border:1px solid var(--gold);
+    padding:10px 22px;
+    border-radius:2px;
+    color:var(--parchment) !important;
+  }
+  .nav-cta:hover{ background:var(--gold); color:var(--espresso) !important; }
+  .nav-toggle{ display:none; background:none; border:none; cursor:pointer; }
+  .nav-toggle span{ display:block; width:26px; height:1px; background:var(--sand); margin:6px 0; }
+
+  @media (max-width:860px){
+    nav ul{
+      position:fixed; top:0; right:0; height:100vh; width:min(78vw,320px);
+      background:var(--espresso);
+      flex-direction:column; justify-content:center; align-items:flex-start;
+      padding:0 42px; gap:30px;
+      transform:translateX(100%);
+      transition:transform 0.45s ease;
+    }
+    nav ul.open{ transform:translateX(0); }
+    .nav-toggle{ display:block; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center;
+    background:
+      radial-gradient(ellipse at 78% 30%, rgba(161,92,78,0.35), transparent 55%),
+      linear-gradient(160deg, var(--espresso) 0%, #221510 70%);
+    overflow:hidden;
+  }
+  .hero-inner{
+    max-width:var(--max); margin:0 auto; width:100%;
+    padding:140px 5% 100px;
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap:40px; align-items:center;
+  }
+  .hero-eyebrow{ margin-bottom:28px; justify-content:flex-start; }
+  .hero h1{
+    color:var(--parchment);
+    font-size:clamp(2.6rem, 5.2vw, 4.4rem);
+    line-height:1.08;
+    letter-spacing:0.01em;
+    max-width:11.5ch;
+  }
+  .hero h1 em{ color:var(--clay-light); font-style:italic; }
+  .hero p{
+    color:var(--sand);
+    font-size:1.05rem;
+    max-width:46ch;
+    margin-top:26px;
+    font-weight:300;
+  }
+  .hero-actions{ display:flex; gap:18px; margin-top:42px; flex-wrap:wrap; }
+  .btn{
+    display:inline-block;
+    padding:15px 32px;
+    font-size:0.8rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    border-radius:2px;
+    transition:all 0.3s ease;
+  }
+  .btn-primary{
+    background:var(--clay);
+    color:var(--parchment);
+    border:1px solid var(--clay);
+  }
+  .btn-primary:hover{ background:var(--clay-light); border-color:var(--clay-light); }
+  .btn-ghost{
+    border:1px solid var(--gold);
+    color:var(--sand);
+  }
+  .btn-ghost:hover{ background:rgba(176,141,79,0.12); color:var(--parchment); }
+
+  /* hero art: single-line pilates figure */
+  .hero-art{
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero-art svg{ width:100%; max-width:420px; }
+  .hero-art .ring-outer{
+    position:absolute; width:340px; height:340px; border-radius:50%;
+    border:1px solid rgba(176,141,79,0.3);
+    animation: breathe 6s ease-in-out infinite;
+  }
+  @media (max-width:860px){
+    .hero-inner{ grid-template-columns:1fr; text-align:center; padding-top:150px;}
+    .hero-eyebrow{ justify-content:center; }
+    .hero h1{ max-width:none; margin:0 auto;}
+    .hero p{ margin-inline:auto; }
+    .hero-actions{ justify-content:center; }
+    .hero-art{ order:-1; margin-bottom:10px; }
+    .hero-art svg{ max-width:260px; }
+  }
+
+  .scroll-cue{
+    position:absolute; bottom:34px; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    color:var(--sand); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase;
+  }
+  .scroll-cue::after{
+    content:''; width:1px; height:34px; background:linear-gradient(var(--gold), transparent);
+  }
+
+  /* ---------- section shell ---------- */
+  section{ padding:120px 5%; }
+  .section-inner{ max-width:var(--max); margin:0 auto; }
+  .section-head{ text-align:center; margin-bottom:64px; }
+  .section-head .bracket{ margin-bottom:22px; }
+  .section-head h2{ font-size:clamp(2rem,3.4vw,2.9rem); }
+  .section-head p{ color:var(--ink-soft); max-width:56ch; margin:16px auto 0; }
+
+  .dark-section{ background:var(--espresso); color:var(--sand); }
+  .dark-section h2{ color:var(--parchment); }
+  .dark-section .section-head p{ color:var(--sand); opacity:0.85; }
+
+  /* ---------- philosophy / intro ---------- */
+  .philosophy{
+    display:grid; grid-template-columns: 0.85fr 1.15fr; gap:70px; align-items:center;
+  }
+  .philosophy-quote{
+    font-family:'Cormorant',serif;
+    font-size:clamp(1.5rem,2.4vw,2rem);
+    font-weight:400;
+    color:var(--espresso);
+    line-height:1.5;
+  }
+  .philosophy-quote span{ color:var(--clay); }
+  .stat-row{
+    display:flex; gap:50px; margin-top:44px; flex-wrap:wrap;
+  }
+  .stat-row div{ border-left:1px solid var(--line); padding-left:18px; }
+  .stat-row .num{ font-family:'Cormorant',serif; font-size:2.1rem; color:var(--clay); display:block; }
+  .stat-row .lbl{ font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft); }
+
+  .philosophy-panel{
+    background:var(--sand);
+    border-radius:2px;
+    padding:52px 44px;
+    position:relative;
+  }
+  .philosophy-panel::before{
+    content:'';
+    position:absolute; inset:14px;
+    border:1px solid rgba(176,141,79,0.5);
+    pointer-events:none;
+  }
+  .philosophy-panel h3{ font-size:1.5rem; margin-bottom:18px; }
+  .philosophy-panel ul{ list-style:none; }
+  .philosophy-panel li{
+    padding:14px 0;
+    border-bottom:1px solid rgba(176,141,79,0.28);
+    display:flex; gap:14px; align-items:baseline;
+    font-size:0.95rem; color:var(--ink-soft);
+  }
+  .philosophy-panel li:last-child{ border-bottom:none; }
+  .philosophy-panel li .breath-ring{ flex-shrink:0; }
+
+  @media (max-width:860px){
+    .philosophy{ grid-template-columns:1fr; gap:42px; }
+  }
+
+  /* ---------- testimonials ---------- */
+  .testi-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:30px;
+  }
+  .testi-card{
+    background:rgba(245,238,226,0.04);
+    border:1px solid rgba(231,214,188,0.18);
+    padding:38px 32px;
+    border-radius:2px;
+    display:flex; flex-direction:column; gap:20px;
+  }
+  .testi-mark{ font-family:'Cormorant',serif; font-size:3rem; color:var(--gold); line-height:0.4; }
+  .testi-card p.body{ font-size:0.98rem; color:var(--sand); opacity:0.92; flex-grow:1; }
+  .testi-name{ font-family:'Cormorant SC',serif; letter-spacing:0.08em; font-size:0.95rem; color:var(--parchment); }
+  .testi-role{ font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); }
+
+  @media (max-width:960px){
+    .testi-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- schedule ---------- */
+  .schedule-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .day-card{
+    background:var(--parchment);
+    padding:30px 26px;
+    min-height:170px;
+  }
+  .day-card.empty{ display:flex; flex-direction:column; justify-content:center; align-items:flex-start; }
+  .day-card h3{
+    font-family:'Cormorant SC',serif;
+    font-size:0.95rem; letter-spacing:0.2em;
+    color:var(--clay);
+    margin-bottom:16px;
+  }
+  .day-card .cls{ margin-bottom:12px; }
+  .day-card .time{ font-size:0.78rem; letter-spacing:0.06em; color:var(--gold); text-transform:uppercase; }
+  .day-card .name{ font-family:'Cormorant',serif; font-size:1.15rem; color:var(--espresso); }
+  .day-card .instr{ font-size:0.82rem; color:var(--ink-soft); font-style:italic; }
+  .day-card.soon p{ font-family:'Cormorant',serif; font-size:1.1rem; color:var(--ink-soft); font-style:italic; }
+
+  @media (max-width:860px){
+    .schedule-grid{ grid-template-columns:1fr; }
+  }
+
+  .schedule-note{
+    text-align:center; margin-top:40px; color:var(--ink-soft); font-size:0.9rem;
+  }
+
+  /* ---------- instructors strip ---------- */
+  .instructor-strip{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:14px 46px;
+    margin-top:10px;
+  }
+  .instructor-strip .name{
+    font-family:'Cormorant',serif; font-size:1.3rem; color:var(--espresso);
+    position:relative;
+  }
+  .instructor-strip .name::after{
+    content:''; position:absolute; left:0; bottom:-6px; height:1px; width:100%;
+    background:var(--gold); transform:scaleX(0); transform-origin:left;
+    transition:transform 0.3s ease;
+  }
+  .instructor-strip .name:hover::after{ transform:scaleX(1); }
+
+  /* ---------- pricing ---------- */
+  .price-table{
+    max-width:720px; margin:0 auto;
+    border:1px solid var(--line);
+  }
+  .price-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:26px 40px;
+    border-bottom:1px solid var(--line);
+    transition:background 0.3s ease;
+  }
+  .price-row:last-child{ border-bottom:none; }
+  .price-row:hover{ background:rgba(176,141,79,0.06); }
+  .price-row .plan{
+    font-family:'Cormorant',serif; font-size:1.35rem; color:var(--espresso);
+  }
+  .price-row .plan small{
+    display:block; font-family:'Jost',sans-serif; font-size:0.74rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--ink-soft); margin-top:4px; font-weight:400;
+  }
+  .price-row .amount{
+    font-family:'Cormorant',serif; font-size:1.6rem; color:var(--clay);
+  }
+  .price-row.featured{ background:rgba(176,141,79,0.09); }
+  .price-cta{ text-align:center; margin-top:48px; }
+
+  /* ---------- visit / footer-cta ---------- */
+  .visit-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start;
+  }
+  .visit-info dl{ display:grid; grid-template-columns:auto 1fr; gap:14px 22px; margin-top:30px; }
+  .visit-info dt{
+    font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold);
+    padding-top:3px;
+  }
+  .visit-info dd{ font-size:1.05rem; color:var(--parchment); font-family:'Cormorant',serif; }
+  .visit-info .hours-list{ font-family:'Jost',sans-serif; font-size:0.92rem; color:var(--sand); }
+  .visit-map{
+    border:1px solid rgba(231,214,188,0.25);
+    aspect-ratio:1/1;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    background:
+      linear-gradient(rgba(176,141,79,0.06) 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, rgba(176,141,79,0.06) 1px, transparent 1px) 0 0/40px 40px,
+      #241610;
+  }
+  .visit-map .pin{
+    width:16px; height:16px; border-radius:50%;
+    background:var(--clay);
+    box-shadow:0 0 0 6px rgba(161,92,78,0.25), 0 0 0 16px rgba(161,92,78,0.12);
+    position:relative;
+  }
+  .visit-map .pin::after{
+    content:'103 W Waterloo St';
+    position:absolute; top:26px; left:50%; transform:translateX(-50%);
+    white-space:nowrap; font-family:'Cormorant SC',serif; font-size:0.78rem;
+    letter-spacing:0.14em; color:var(--sand); text-transform:uppercase;
+  }
+
+  @media (max-width:860px){
+    .visit-grid{ grid-template-columns:1fr; gap:46px; }
+  }
+
+  /* ---------- final cta ---------- */
+  .final-cta{
+    background:linear-gradient(135deg, var(--clay) 0%, #8C4C40 100%);
+    text-align:center;
+    padding:110px 5%;
+  }
+  .final-cta h2{ color:var(--parchment); font-size:clamp(2.1rem,4vw,3.2rem); }
+  .final-cta p{ color:rgba(245,238,226,0.9); max-width:50ch; margin:18px auto 40px; }
+  .final-cta .btn-primary{ background:var(--espresso); border-color:var(--espresso); }
+  .final-cta .btn-ghost{ border-color:rgba(245,238,226,0.6); color:var(--parchment); }
+
+  footer{
+    background:var(--espresso);
+    color:var(--sand);
+    padding:60px 5% 30px;
+    text-align:center;
+  }
+  footer .logo{ font-size:1.3rem; margin-bottom:18px; display:inline-block; }
+  footer .foot-links{ display:flex; gap:30px; justify-content:center; margin:26px 0; font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase; flex-wrap:wrap;}
+  footer .foot-links a:hover{ color:var(--gold); }
+  footer .copyright{ font-size:0.78rem; color:rgba(231,214,188,0.5); margin-top:20px; }
+
+  .fade-in{ opacity:0; transform:translateY(24px); transition:opacity 0.8s ease, transform 0.8s ease; }
+  .fade-in.visible{ opacity:1; transform:translateY(0); }
+
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="logo">House of Pilates</div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <nav>
+    <ul id="navList">
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#pricing">Membership</a></li>
+      <li><a href="#visit">Visit</a></li>
+      <li><a href="#book" class="nav-cta">Book a Class</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="bracket hero-eyebrow"><span class="rule"></span><span class="label">Canal Winchester, Ohio</span><span class="rule"></span></div>
+      <h1>Your home <em>on the mat</em> is waiting.</h1>
+      <p>An elevated mat Pilates studio designed with intention, born from resilience, and created for women who want to feel connected, empowered, and renewed.</p>
+      <div class="hero-actions">
+        <a href="#book" class="btn btn-primary">Book a Class</a>
+        <a href="#schedule" class="btn btn-ghost">View Schedule</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="ring-outer"></div>
+      <svg viewBox="0 0 300 340" fill="none">
+        <path d="M150 40 C 165 40 175 52 175 68 C175 84 165 94 150 94 C135 94 125 84 125 68 C125 52 135 40 150 40 Z" stroke="#B08D4F" stroke-width="1.4"/>
+        <path d="M150 94 C 150 130 145 150 100 168 C 70 180 55 210 60 250" stroke="#C08172" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <path d="M150 94 C 150 130 155 150 205 158 C 235 163 250 190 244 230" stroke="#C08172" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <path d="M150 130 C 120 150 90 150 65 132" stroke="#E7D6BC" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M150 130 C 180 150 210 150 235 132" stroke="#E7D6BC" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M110 250 C 108 280 116 305 140 320" stroke="#B08D4F" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <path d="M195 250 C 197 280 189 305 165 320" stroke="#B08D4F" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <line x1="40" y1="300" x2="265" y2="300" stroke="#4A2F22" stroke-width="10" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+  <div class="scroll-cue">Breathe In</div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="section-inner philosophy">
+    <div class="fade-in">
+      <p class="philosophy-quote">"We built this studio for the mornings you almost didn't come — <span>and left changed anyway.</span> Every class is thirty minutes of strength, and thirty seconds of stillness you didn't know you needed."</p>
+      <div class="stat-row">
+        <div><span class="num">6</span><span class="lbl">Instructors</span></div>
+        <div><span class="num">20+</span><span class="lbl">Classes / Week</span></div>
+        <div><span class="num">1</span><span class="lbl">Studio, Fully Yours</span></div>
+      </div>
+    </div>
+    <div class="philosophy-panel fade-in">
+      <h3>What you'll find here</h3>
+      <ul>
+        <li><span class="breath-ring"></span> A hard workout, held in a genuinely welcoming room</li>
+        <li><span class="breath-ring"></span> Teachers who coach with care, not just count reps</li>
+        <li><span class="breath-ring"></span> A beautiful, considered space to start your day in</li>
+        <li><span class="breath-ring"></span> Strength and mindfulness practiced side by side</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="dark-section">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <div class="bracket dark"><span class="rule"></span><span class="label">In Their Words</span><span class="rule"></span></div>
+      <h2>Loved, from the inside out</h2>
+      <p>Real notes from women who found their footing here.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fade-in">
+        <div class="testi-mark">"</div>
+        <p class="body">Absolutely love House of Pilates. A hard workout, welcoming environment, supportive teachers and beautiful space. I've already noticed real changes in myself, both physically and mentally — truly one of my favorite ways to start the day.</p>
+        <div><div class="testi-name">Chelsie Smith</div><div class="testi-role">Studio Member</div></div>
+      </div>
+      <div class="testi-card fade-in">
+        <div class="testi-mark">"</div>
+        <p class="body">We're so grateful for House of Pilates. Thank you, Lindsay, for giving our military families a safe space to unwind together. The studio is gorgeous and the class was exactly what we needed — rejuvenating and peaceful.</p>
+        <div><div class="testi-name">Gabbi Martin</div><div class="testi-role">Studio Member</div></div>
+      </div>
+      <div class="testi-card fade-in">
+        <div class="testi-mark">"</div>
+        <p class="body">Pam is an amazing instructor who truly teaches from the heart. You can feel her care and intention in every class — if you're looking to deepen your practice with guidance you can trust, I can't recommend her enough.</p>
+        <div><div class="testi-name">Stephanie Spruill</div><div class="testi-role">Studio Member</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <div class="bracket"><span class="rule"></span><span class="label">This Week</span><span class="rule"></span></div>
+      <h2>Find your class</h2>
+      <p>Seven days of mat Pilates, sculpt, and slow flow — early mornings, midday resets, and evening wind-downs.</p>
+    </div>
+
+    <div class="schedule-grid fade-in">
+      <div class="day-card">
+        <h3>Monday</h3>
+        <div class="cls"><div class="time">9:00 · 12:00 · 6:00pm</div><div class="name">Pilates Sculpt</div><div class="instr">with Jessie</div></div>
+        <div class="cls"><div class="time">7:30pm</div><div class="name">Pause Practice</div><div class="instr">with Marcy</div></div>
+      </div>
+      <div class="day-card">
+        <h3>Tuesday</h3>
+        <div class="cls"><div class="time">5:30 · 8:00am</div><div class="name">Power Sculpt</div><div class="instr">with Lindsay</div></div>
+        <div class="cls"><div class="time">6:00pm</div><div class="name">Sculpt</div><div class="instr">with Roma</div></div>
+      </div>
+      <div class="day-card empty soon">
+        <h3>Wednesday</h3>
+        <p>New class options coming soon.</p>
+      </div>
+      <div class="day-card">
+        <h3>Thursday</h3>
+        <div class="cls"><div class="time">5:30 · 8:00 · 5:15pm</div><div class="name">Power Sculpt</div><div class="instr">with Lindsay</div></div>
+        <div class="cls"><div class="time">7:30pm</div><div class="name">Pause Practice</div><div class="instr">with Marcy</div></div>
+      </div>
+      <div class="day-card">
+        <h3>Friday</h3>
+        <div class="cls"><div class="time">9:00 · 12:00pm</div><div class="name">Glutes &amp; Abs</div><div class="instr">with Jessie</div></div>
+      </div>
+      <div class="day-card">
+        <h3>Saturday</h3>
+        <div class="cls"><div class="time">7:00am</div><div class="name">Power Yoga</div><div class="instr">with Pam</div></div>
+        <div class="cls"><div class="time">8:15 · 9:30am</div><div class="name">Pilates Sculpt</div><div class="instr">with Lindsay</div></div>
+      </div>
+      <div class="day-card">
+        <h3>Sunday</h3>
+        <div class="cls"><div class="time">8:30am</div><div class="name">Power Yoga</div><div class="instr">with Pam</div></div>
+        <div class="cls"><div class="time">12:00pm</div><div class="name">Intro to Pilates</div><div class="instr">with Lindsay</div></div>
+        <div class="cls"><div class="time">6:30pm</div><div class="name">Slow Vin Flow</div><div class="instr">with Audria</div></div>
+      </div>
+    </div>
+
+    <p class="schedule-note fade-in">Class times are subject to change &nbsp;·&nbsp; Book ahead through our booking app to hold your spot</p>
+
+    <div class="instructor-strip fade-in">
+      <span class="name">Jessie</span>
+      <span class="name">Lindsay</span>
+      <span class="name">Roma</span>
+      <span class="name">Marcy</span>
+      <span class="name">Pam</span>
+      <span class="name">Audria</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="dark-section">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <div class="bracket dark"><span class="rule"></span><span class="label">Membership</span><span class="rule"></span></div>
+      <h2>Simple pricing, no pressure</h2>
+      <p>Drop in whenever it suits you, or settle in with an unlimited monthly membership.</p>
+    </div>
+
+    <div class="price-table fade-in">
+      <div class="price-row">
+        <div class="plan">Drop-in Class<small>Try a single session</small></div>
+        <div class="amount">$25</div>
+      </div>
+      <div class="price-row">
+        <div class="plan">5-Class Pass<small>Use over 60 days</small></div>
+        <div class="amount">$115</div>
+      </div>
+      <div class="price-row">
+        <div class="plan">10-Class Pass<small>Use over 90 days</small></div>
+        <div class="amount">$220</div>
+      </div>
+      <div class="price-row featured">
+        <div class="plan">8 Class Monthly<small>Recurring, most flexible</small></div>
+        <div class="amount">$160</div>
+      </div>
+      <div class="price-row featured">
+        <div class="plan">Unlimited Monthly<small>Every class, every week</small></div>
+        <div class="amount">$200</div>
+      </div>
+    </div>
+
+    <div class="price-cta fade-in">
+      <a href="#book" class="btn btn-primary">Choose Your Plan</a>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit" style="background:#221510;">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <div class="bracket dark"><span class="rule"></span><span class="label">Visit The Studio</span><span class="rule"></span></div>
+      <h2 style="color:#F5EEE2;">Come see it for yourself</h2>
+    </div>
+    <div class="visit-grid">
+      <div class="visit-info fade-in">
+        <dl>
+          <dt>Address</dt>
+          <dd>103 West Waterloo Street<br>Canal Winchester, OH</dd>
+          <dt>Phone</dt>
+          <dd>(740) 407-8408</dd>
+          <dt>Hours</dt>
+          <dd class="hours-list">
+            Mon &amp; Thu — 5:30am to 7:30pm<br>
+            Tue — 5:30am to 6:00pm<br>
+            Fri — 9:00am to 12:00pm<br>
+            Sat &amp; Sun — 7:00am to 6:30pm<br>
+            Wed — Studio closed for classes
+          </dd>
+          <dt>Booking</dt>
+          <dd>Online &amp; in-person</dd>
+        </dl>
+        <div style="margin-top:36px;">
+          <a href="#book" class="btn btn-primary">Book a Class</a>
+        </div>
+      </div>
+      <div class="visit-map fade-in">
+        <div class="pin"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="book" class="final-cta">
+  <div class="bracket" style="color:rgba(43,27,18,0.6); margin-bottom:20px;"><span class="rule" style="background:rgba(43,27,18,0.5);"></span><span class="label" style="color:rgba(43,27,18,0.75);">Ready When You Are</span><span class="rule" style="background:rgba(43,27,18,0.5);"></span></div>
+  <h2>Your mat is set.</h2>
+  <p>Reserve your spot in the next class, or reach out and we'll help you find the right place to start.</p>
+  <div class="hero-actions" style="justify-content:center;">
+    <a href="tel:7404078408" class="btn btn-primary">Call (740) 407-8408</a>
+    <a href="#schedule" class="btn btn-ghost">See This Week's Schedule</a>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">House of Pilates</div>
+  <div class="foot-links">
+    <a href="#philosophy">Philosophy</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#pricing">Membership</a>
+    <a href="#visit">Visit</a>
+  </div>
+  <div class="copyright">103 West Waterloo Street, Canal Winchester, OH &nbsp;·&nbsp; (740) 407-8408</div>
+  <div class="copyright">© 2026 House of Pilates. All rights reserved.</div>
+</footer>
+
+<script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const navToggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+  navToggle.addEventListener('click', () => navList.classList.toggle('open'));
+  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navList.classList.remove('open')));
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
